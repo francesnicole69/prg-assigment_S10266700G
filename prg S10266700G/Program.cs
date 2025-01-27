@@ -1,10 +1,10 @@
-﻿using s10266700G_Prg;
+﻿using prg_S10266700G;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
-namespace AirlineBoardingGateApp
+namespace prg_S10266700G
 {
 
     // alson s10266700G
@@ -46,8 +46,6 @@ namespace AirlineBoardingGateApp
                     while ((line = reader.ReadLine()) != null)
                     {
                         string[] parts = line.Split(',');
-
-                        // Ensure the line has the correct format
                         if (parts.Length != 2)
                         {
                             Console.WriteLine($"Invalid airline data: {line}");
@@ -57,7 +55,6 @@ namespace AirlineBoardingGateApp
                         string code = parts[0].Trim();
                         string name = parts[1].Trim();
 
-                        // Create an Airline object and add it to the dictionary
                         Airline airline = new Airline(name, code, new Dictionary<string, Flight>());
                         airlineDictionary[code] = airline;
                     }
@@ -69,7 +66,6 @@ namespace AirlineBoardingGateApp
             }
         }
 
-        // Method to load boarding gates from boardinggates.csv
         static void LoadBoardingGates(string filePath, Dictionary<string, BoardingGate> boardingGateDictionary)
         {
             using (StreamReader reader = new StreamReader(filePath))
@@ -79,7 +75,6 @@ namespace AirlineBoardingGateApp
                 {
                     string[] parts = line.Split(',');
 
-                    // Ensure the line has the correct format
                     if (parts.Length != 4)
                     {
                         Console.WriteLine($"Invalid boarding gate data: {line}");
@@ -87,15 +82,28 @@ namespace AirlineBoardingGateApp
                     }
 
                     string gateName = parts[0].Trim();
-                    bool supportsCFFT = bool.Parse(parts[1].Trim());
-                    bool supportsDDJB = bool.Parse(parts[2].Trim());
-                    bool supportsWTT = bool.Parse(parts[3].Trim());
 
-                    // Create a BoardingGate object and add it to the dictionary
+                    if (!bool.TryParse(parts[1].Trim(), out bool supportsCFFT))
+                    {
+                        continue;
+                    }
+
+                    if (!bool.TryParse(parts[2].Trim(), out bool supportsDDJB))
+                    {
+                        continue;
+                    }
+
+                    if (!bool.TryParse(parts[3].Trim(), out bool supportsWTT))
+                    {
+                        continue;
+                    }
+
                     BoardingGate gate = new BoardingGate(gateName, supportsCFFT, supportsDDJB, supportsWTT, null);
+
                     boardingGateDictionary[gateName] = gate;
                 }
             }
         }
+
     }
 }

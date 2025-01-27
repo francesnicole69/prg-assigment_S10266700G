@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace s10266700G_Prg
+namespace prg_S10266700G
 {
     internal class Airline
     {
@@ -49,11 +49,11 @@ namespace s10266700G_Prg
         {
             return 1;
         }
-        public bool RemoveFlight(Flight flight)
+        public bool RemoveFlight(Flight value)
         {
-            if (Flights.ContainsKey(flight.FlightNumber))
+            if (Flights.ContainsKey(value.FlightNumber))
             {
-                Flights.Remove(flight.FlightNumber, flight);
+                Flights.Remove(value.FlightNumber);
                 return true;
             }
             else

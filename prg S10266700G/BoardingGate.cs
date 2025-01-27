@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace s10266700G_Prg
+namespace prg_S10266700G
 {
     internal class BoardingGate
     {

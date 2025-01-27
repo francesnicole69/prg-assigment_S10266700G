@@ -1,5 +1,4 @@
-﻿using s10266700G_Prg;
-
+﻿using prg_S10266700G;
 internal class Terminal
 {
     private string terminalName;

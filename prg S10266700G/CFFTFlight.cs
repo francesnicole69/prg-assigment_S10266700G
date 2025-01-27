@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TESTING
+namespace prg_S10266700G
 {
     public class CFFTFlight : Flight
     {
