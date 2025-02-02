@@ -25,6 +25,10 @@ namespace prg_S10266700G
 
         public abstract double CalculateFees();
 
+        public string RequestType { get; set; } = "NORM";
+        public BoardingGate? BoardingGate { get; set; }
+        public string? SpecialRequestCode { get; set; }
+
 
 
         public override string ToString()

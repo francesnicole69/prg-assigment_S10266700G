@@ -27,11 +27,11 @@ namespace prg_S10266700G
             get { return supportsDDJB; }
             set { supportsDDJB = value; }
         }
-        private bool supportsWTT;
-        public bool SupportsWTT
+        private bool supportsLWTT;
+        public bool SupportsLWTT
         {
-            get { return supportsWTT; }
-            set { supportsWTT = value; }
+            get { return supportsLWTT; }
+            set { supportsLWTT = value; }
 
 
         }
@@ -47,7 +47,7 @@ namespace prg_S10266700G
             gateName = gn;
             supportsCFFT = sCFFT;
             supportsDDJB = sDDJB;
-            supportsWTT = sWTT;
+            supportsLWTT = sWTT;
             flight = f;
         }
         public double CalculateFees()
@@ -58,6 +58,14 @@ namespace prg_S10266700G
         {
             return ($"GateName:{gateName} SupportCFFT:{supportsCFFT} SupportsDDJB:{supportsDDJB} SupportLWTT{SupportsDDJB} flight: {flight}");
         }
+
+        public string GateNumber { get; set; }
+
+        public BoardingGate(string gateNumber)
+        {
+            GateNumber = gateNumber;
+        }
+        public Flight? AssignedFlight { get; set; }
 
     }
 }
