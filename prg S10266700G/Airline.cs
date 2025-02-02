@@ -21,12 +21,16 @@ namespace prg_S10266700G
             get { return code; }
             set { code = value; }
         }
-        private Dictionary<String, Flight> flights;
-        public Dictionary<String, Flight> Flights
+
+        private Dictionary<string, Flight> flights = new Dictionary<string, Flight>();
+
+        public Dictionary<string, Flight> Flights
         {
-            get { return Flights; }
+            get { return flights; }  
             set { flights = value; }
         }
+
+
         public Airline(string n, string c, Dictionary<String, Flight> f)
         {
             name = n;

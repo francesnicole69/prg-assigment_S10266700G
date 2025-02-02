@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace prg_S10266700G
 {
-    public class DDJBFlight : Flight
+    internal class DDJBFlight : Flight
     {
         public double RequestFee { get; set; }
 

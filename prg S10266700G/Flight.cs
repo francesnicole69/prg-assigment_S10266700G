@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace prg_S10266700G
 {
-    public abstract class Flight
+    abstract class Flight
     {
         public string FlightNumber { get; set; }
         public string Origin { get; set; }

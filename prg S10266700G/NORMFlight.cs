@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace prg_S10266700G
 {
-    public class NORMFlight : Flight
+    internal class NORMFlight : Flight
     {
         public NORMFlight(string flightNumber, string origin, string destination, DateTime expectedTime, string status)
             : base(flightNumber, origin, destination, expectedTime, status) { }
