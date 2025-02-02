@@ -25,6 +25,8 @@ namespace prg_S10266700G
 
         public abstract double CalculateFees();
 
+
+
         public override string ToString()
         {
             return $"Flight Number: {FlightNumber}, Origin: {Origin}, Destination: {Destination}, Expected Time: {ExpectedTime}, Status: {Status}";
