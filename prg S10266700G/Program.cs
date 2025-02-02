@@ -121,7 +121,7 @@ namespace prg_S10266700G
                     if (airlineDictionary.TryGetValue(airlineCode, out Airline airline))
                     {
                         airline.Flights[flightNumber] = flight;
-                        flightDictionary[flightNumber] = flight; // <-- Ensure flightDictionary is also updated
+                        flightDictionary[flightNumber] = flight;
                     }
                     else
                     {
@@ -305,13 +305,11 @@ namespace prg_S10266700G
             Console.WriteLine("List of Airlines for Changi Airport Terminal 5");
             Console.WriteLine("=============================================");
 
-            // Display all airlines
             foreach (var airline in airlineDictionary.Values)
             {
                 Console.WriteLine($"{airline.Code,-15} {airline.Name}");
             }
 
-            // Prompt for airline code
             Console.Write("\nEnter Airline Code: ");
             string airlineCode = Console.ReadLine().Trim().ToUpper();
 
@@ -328,7 +326,6 @@ namespace prg_S10266700G
             Console.WriteLine("=============================================");
             Console.WriteLine("Flight Number   Origin                 Destination            Expected Departure/Arrival Time");
 
-            // Display all flights for the selected airline
             var airlineFlights = selectedAirline.Flights.Values.ToList();
             if (airlineFlights.Count == 0)
             {
@@ -341,7 +338,6 @@ namespace prg_S10266700G
                 Console.WriteLine($"{flight.FlightNumber,-15} {flight.Origin,-22} {flight.Destination,-22} {flight.ExpectedTime}");
             }
 
-            // Prompt for flight number
             Console.Write("\nEnter Flight Number: ");
             string flightNumber = Console.ReadLine().Trim().ToUpper();
 
@@ -353,7 +349,6 @@ namespace prg_S10266700G
 
             Flight selectedFlight = selectedAirline.Flights[flightNumber];
 
-            // Prompt to modify or delete
             Console.WriteLine("\n1. Modify Flight");
             Console.WriteLine("2. Delete Flight");
             Console.Write("Choose an option: ");
@@ -421,7 +416,6 @@ namespace prg_S10266700G
             Console.WriteLine("\nFlight updated!");
             Console.WriteLine(flight.ToString());
 
-            // Attempt to print additional properties dynamically
             var specialRequestCodeProp = typeof(Flight).GetProperty("SpecialRequestCode");
             var boardingGateProp = typeof(Flight).GetProperty("BoardingGate");
 
@@ -512,7 +506,7 @@ namespace prg_S10266700G
             Console.WriteLine($"\nFlight Number: {selectedFlight.FlightNumber}");
             Console.WriteLine($"Origin: {selectedFlight.Origin}");
             Console.WriteLine($"Destination: {selectedFlight.Destination}");
-            Console.WriteLine($"Expected Time: {selectedFlight.ExpectedTime:dd/M/yyyy h:mm:ss tt}");
+            Console.WriteLine($"Expected Time: {selectedFlight.ExpectedTime:dd/M/yyyy h:mm  :ss tt}");
             Console.WriteLine($"Special Request Code: {selectedFlight.SpecialRequestCode ?? "None"}");
             Console.WriteLine($"Boarding Gate Name: {gateName}");
             Console.WriteLine($"Supports DDJB: {selectedGate.SupportsDDJB}");
@@ -565,10 +559,12 @@ namespace prg_S10266700G
                 Console.Write("Enter Destination: ");
                 string destination = Console.ReadLine().Trim();
 
-                Console.Write("Enter Expected Departure/Arrival Time (dd/MM/yyyy HH:mm): ");
-                if (!DateTime.TryParseExact(Console.ReadLine().Trim(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime expectedTime))
+                Console.Write("Enter Expected Departure/Arrival Time (dd/mm/yyyy hh:mm): ");
+                string dateTimeInput = Console.ReadLine().Trim();
+
+                if (!DateTime.TryParse(dateTimeInput, out DateTime expectedTime))
                 {
-                    Console.WriteLine("Invalid date format.");
+                    Console.WriteLine($"Invalid date format. Please use the format 'dd/MM/yyyy HH:mm'. You entered: {dateTimeInput}");
                     continue;
                 }
 
@@ -587,11 +583,15 @@ namespace prg_S10266700G
                 FlightDictionary[flightNumber] = flight;
                 AppendFlightToCsv(flight);
                 Console.WriteLine($"Flight {flightNumber} has been added!");
+
+                Console.Write("Would you like to add another flight? (Y/N): ");
+                addAnother = Console.ReadLine().Trim().ToUpper() == "Y";
             }
-
         }
+    
 
-        static void DisplayScheduledFlights()
+
+    static void DisplayScheduledFlights()
         {
             Console.WriteLine("\n=============================================");
             Console.WriteLine("Flight Schedule for Changi Airport Terminal 5");
